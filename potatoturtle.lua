@@ -12,8 +12,11 @@ end
 
 function moveyoudumbfuckingturtle()
     for i=1,8 do
-        turtle.digDown()
-        turtle.placeDown() 
+        movsuccess, movdata = turtle.inspectDown()
+        if (not movsuccess) or (movdata.metadata == 7) then
+            turtle.digDown()
+            turtle.placeDown()
+        end
         while (not turtle.forward()) do
             os.sleep(1)
         end
