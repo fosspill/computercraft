@@ -1,5 +1,5 @@
 1) Needs to empty full chest
-2) Needs to make sure he moves
+2) Needs to make sure he moves (half done. also with turns)
 
 function amIHomeYet()
     blingsuc, blingdat = turtle.inspectDown()
