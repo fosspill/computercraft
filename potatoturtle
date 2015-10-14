@@ -14,7 +14,9 @@ function moveyoudumbfuckingturtle()
     for i=1,8 do
         turtle.digDown()
         turtle.placeDown() 
-        turtle.forward()
+        while (not turtle.forward()) do
+            os.sleep(1)
+        end
     end
 end
   
@@ -55,7 +57,10 @@ function backToHub()
         turtle.forward()
     end
     turtle.turnRight()
-    turtle.dropUp()
+    for i = 16,1,-1 do
+        turtle.select(i)
+        turtle.dropUp()
+    end
     turtle.forward()
     nextRight = 1
 end
