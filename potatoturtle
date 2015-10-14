@@ -1,0 +1,70 @@
+function amIHomeYet()
+    blingsuc, blingdat = turtle.inspectDown()
+    if blingdat.name == "chisel:diamond_block" then
+        return true
+    else
+        return false
+    end
+end   
+
+function moveyoudumbfuckingturtle()
+    for i=1,8 do
+        turtle.digDown()
+        turtle.placeDown() 
+        turtle.forward()
+    end
+end
+  
+function turn()
+    if nextRight == 1 then
+        turtle.turnRight()
+        turtle.digDown()
+        turtle.placeDown() 
+        turtle.forward()
+        turtle.turnRight()
+        nextRight = 0    
+    else
+        turtle.turnLeft()
+        turtle.digDown()
+        turtle.placeDown() 
+        turtle.forward()
+        turtle.turnLeft()
+        nextRight = 1
+    end
+end
+
+function hibernate()
+    rest = true
+    while (rest == true) do
+        os.sleep(10)
+        local success, data = turtle.inspectDown()
+        if data.metadata == 7 then
+            rest = false
+        end
+    end
+end
+
+function backToHub()
+    turtle.turnRight()
+    turtle.forward()
+    turtle.turnRight()
+    for i=1,17 do 
+        turtle.forward()
+    end
+    turtle.turnRight()
+    turtle.dropUp()
+    turtle.forward()
+    nextRight = 1
+end
+
+
+while (1 == 1) do
+    backToHub()
+    while (not amIHomeYet()) do
+        moveyoudumbfuckingturtle()
+        turn() 
+    end
+    turtle.turnRight()
+    turtle.back()
+    hibernate()
+end
