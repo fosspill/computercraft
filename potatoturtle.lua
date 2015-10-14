@@ -26,15 +26,20 @@ end
 function turn()
     if nextRight == 1 then
         turtle.turnRight()
-        turtle.digDown()
-        turtle.placeDown() 
+        tursuccess, turdata = turtle.inspectDown()
+        if (not tursuccess) or (turdata.metadata == 7) then
+            turtle.digDown()
+            turtle.placeDown()
+        end
         turtle.forward()
         turtle.turnRight()
         nextRight = 0    
     else
         turtle.turnLeft()
-        turtle.digDown()
-        turtle.placeDown() 
+        if (not tursuccess) or (turdata.metadata == 7) then
+            turtle.digDown()
+            turtle.placeDown()
+        end
         turtle.forward()
         turtle.turnLeft()
         nextRight = 1
