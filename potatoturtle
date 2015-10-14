@@ -1,3 +1,6 @@
+1) Needs to empty full chest
+2) Needs to make sure he moves
+
 function amIHomeYet()
     blingsuc, blingdat = turtle.inspectDown()
     if blingdat.name == "chisel:diamond_block" then
