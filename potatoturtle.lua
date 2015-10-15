@@ -11,41 +11,52 @@ function amIHomeYet()
     end
 end   
 
-function moveyoudumbfuckingturtle()
-    for i=1,8 do
-        movsuccess, movdata = turtle.inspectDown()
-        if (not movsuccess) or (movdata.metadata == 7) then
-            turtle.digDown()
-            turtle.placeDown()
-        end
+function secureMove(direction)
+    if (direction == "forward") then
         while (not turtle.forward()) do
             os.sleep(1)
         end
+    elseif (direction == "back") then
+        while (not turtle.back()) do
+            os.sleep(1)
+        end
+    end
+end
+
+function secureHarvestAndPlant()
+    local secsuccess, secdata = turtle.inspectDown()
+    if (secdata.metadata == 7) then
+        while (not turtle.digDown()) do
+            os.sleep(1)
+        end
+        while (not turtle.placeDown()) do
+            os.sleep(1)
+        end
+    elseif (not secsuccess) then
+        while (not turtle.placeDown()) do
+            os.sleep(1)
+        end
+    end
+end
+
+function moveyoudumbfuckingturtle()
+    for i=1,8 do
+        secureHarvestAndPlant()
+        secureMove("forward")
     end
 end
   
 function turn()
     if nextRight == 1 then
         turtle.turnRight()
-        tursuccess, turdata = turtle.inspectDown()
-        if (not tursuccess) or (turdata.metadata == 7) then
-            turtle.digDown()
-            turtle.placeDown()
-        end
-        while (not turtle.forward()) do
-            os.sleep(1)
-        end
+        secureHarvestAndPlant()
+        secureMove("forward")
         turtle.turnRight()
         nextRight = 0    
     else
         turtle.turnLeft()
-        if (not tursuccess) or (turdata.metadata == 7) then
-            turtle.digDown()
-            turtle.placeDown()
-        end
-        while (not turtle.forward()) do
-            os.sleep(1)
-        end
+        secureHarvestAndPlant()
+        secureMove("forward")
         turtle.turnLeft()
         nextRight = 1
     end
@@ -64,23 +75,18 @@ end
 
 function backToHub()
     turtle.turnRight()
-    while (not turtle.forward()) do
-        os.sleep(1)
-    end
+    secureMove("forward")
     turtle.turnRight()
     for i=1,17 do 
-        while (not turtle.forward()) do
-            os.sleep(1)
-        end
+        secureMove("forward")
     end
     turtle.turnRight()
-    for i = 16,1,-1 do
+    for i = 16,2,-1 do
         turtle.select(i)
         turtle.dropUp()
     end
-    while (not turtle.forward()) do
-        os.sleep(1)
-    end
+    turtle.select(1)
+    secureMove("forward")
     nextRight = 1
 end
 
@@ -92,6 +98,6 @@ while (1 == 1) do
         turn() 
     end
     turtle.turnRight()
-    turtle.back()
+    secureMove("back")
     hibernate()
 end
