@@ -34,7 +34,8 @@ function secureHarvestAndPlant()
         end
     elseif (not secsuccess) then
         while (not turtle.placeDown()) do
-            os.sleep(1)
+            turtle.digDown()
+            os.sleep(0.3)
         end
     end
 end
