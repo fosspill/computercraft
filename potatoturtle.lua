@@ -26,11 +26,9 @@ end
 function secureHarvestAndPlant()
     local secsuccess, secdata = turtle.inspectDown()
     if (secdata.metadata == 7) then
-        while (not turtle.digDown()) do
-            os.sleep(1)
-        end
         while (not turtle.placeDown()) do
-            os.sleep(1)
+            turtle.digDown()
+            os.sleep(0.3)
         end
     elseif (not secsuccess) then
         while (not turtle.placeDown()) do
