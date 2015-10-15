@@ -21,6 +21,7 @@ function secureMove(direction)
             os.sleep(1)
         end
     end
+    os.sleep(0.3)
 end
 
 function secureHarvestAndPlant()
