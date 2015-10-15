@@ -1,5 +1,6 @@
-1) Needs to empty full chest
-2) Needs to make sure he moves (half done. also with turns)
+# Needs to empty full chest. Completed. Might want to keep one item in the first slot?
+# Needs to make sure he moves (half done. also with turns)
+# Fix glitch that cause him to skip some crops. (Proposing checking if he successfully completed his tasks before moving on)
 
 function amIHomeYet()
     blingsuc, blingdat = turtle.inspectDown()
@@ -31,7 +32,9 @@ function turn()
             turtle.digDown()
             turtle.placeDown()
         end
-        turtle.forward()
+        while (not turtle.forward()) do
+            os.sleep(1)
+        end
         turtle.turnRight()
         nextRight = 0    
     else
@@ -40,7 +43,9 @@ function turn()
             turtle.digDown()
             turtle.placeDown()
         end
-        turtle.forward()
+        while (not turtle.forward()) do
+            os.sleep(1)
+        end
         turtle.turnLeft()
         nextRight = 1
     end
@@ -59,17 +64,23 @@ end
 
 function backToHub()
     turtle.turnRight()
-    turtle.forward()
+    while (not turtle.forward()) do
+        os.sleep(1)
+    end
     turtle.turnRight()
     for i=1,17 do 
-        turtle.forward()
+        while (not turtle.forward()) do
+            os.sleep(1)
+        end
     end
     turtle.turnRight()
     for i = 16,1,-1 do
         turtle.select(i)
         turtle.dropUp()
     end
-    turtle.forward()
+    while (not turtle.forward()) do
+        os.sleep(1)
+    end
     nextRight = 1
 end
 
