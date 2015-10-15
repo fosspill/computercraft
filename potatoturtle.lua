@@ -1,6 +1,6 @@
-# Needs to empty full chest. Completed. Might want to keep one item in the first slot?
-# Needs to make sure he moves (half done. also with turns)
-# Fix glitch that cause him to skip some crops. (Proposing checking if he successfully completed his tasks before moving on)
+# FIXED Needs to empty full chest.
+# FIXED Needs to make sure he moves (half done. also with turns)
+# FIXED I think... Fix glitch that cause him to skip some crops. (Proposing checking if he successfully completed his tasks before moving on)
 
 function amIHomeYet()
     blingsuc, blingdat = turtle.inspectDown()
